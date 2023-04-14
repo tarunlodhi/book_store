@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load course_custom_tags %}
+
+{%block title%}
+Courses
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'courses/css/scrollbar.css'%}">
+
+{% endblock %}
+
+{%block content%}
+
+<style>
+    .no-preview {
+        cursor: not-allowed;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    a {
+        color: rgb(61, 59, 59);
+    }
+
+    .active-video-link {
+        color: rgb(206, 202, 196);
+    }
+
+    .active-video-link:hover {
+        text-decoration: none;
+        color: #ffffff;
+    }
+
+    $('#myCollapsible').collapse({
+        toggle: false
+    })
+</style>
+<div class="container-fluid">
+    <div>
+        <br>
+        <div class="card p-3">
+            <div class="row">
+                <!-- youtube player -->
+                <div class="col">
+                    <div class="mx-auto">
+                        <iframe id='player' class="mx-auto" width="100%" height="315"
+                            src="https://www.youtube.com/embed/{{video.video_id}}" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+                <!-- leacture list -->
+
+                <div class="col-3">
+                    <div class="container">
+                        <ul id='video_list' class="list-group overflow-y-scroll">
+                            {% is_enrolled request course as enrolled %}
+                            {% for v in videos %}
+                            <li class="list-group-item {% if v == video %} active-video {% endif %} ">
+                                <a class="        
+                             {% if not enrolled and not v.is_preview %} text-muted no-preview {% endif %}
+                             {% if v == video %} active-video-link {% endif %}
+                             " href="?lecture={{v.serial_number}}">
+                                    {{v}}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="row" id="previous">
+                            <div class="d-flex col-3 p-3 bd-highlight">
+                                {% if previous_lecture is None%}
+                                <a class="btn btn-primary invisible " href="?lecture={{previous_lecture}}"
+                                    role="button">⏮️ Privous</a>
+                                {% else %}
+                                <a class="btn btn-primary" href="?lecture={{previous_lecture}}" role="button">⏮️
+                                    Privous</a>
+                                {% endif %}
+                            </div>
+                            <div class="d-flex flex-row-reverse col p-3 bd-highlight" id="next">
+                                {% if next_lecture %}
+                                <a class="btn btn-primary" href="?lecture={{next_lecture}}" role="button">Next
+                                    ⏭️</a>
+                                {% else %}
+                                <a class="btn btn-primary invisible" href="" role="button">Next ⏭️</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <div id="accordion">
+                <!-- course details -->
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                {{course.name}}
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            {{course.description}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!-- Prerequite -->
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                                aria-expanded="false" aria-controls="collapseTwo">
+                                Prerequisite
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                            <ol>
+                                {% for pre in course.prerequisite_set.all %}
+                                <li class="">{{pre.description}}</li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!-- Learnngs -->
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                                aria-expanded="false" aria-controls="collapseThree">
+                                Learnings
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body">
+                            <ol>
+                                {% for l in course.learning_set.all %}
+                                <li class="">{{l.description}}</li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- learning end -->
+            <br>
+            <br>
+            <br>
+        </div>
+
+    </div>
+    <script src="{% static 'courses/js/course_page.js' %}"></script>
+    {%endblock%}
