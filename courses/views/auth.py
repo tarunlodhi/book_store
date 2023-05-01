@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect,render
 from django.contrib.auth import logout , login
 from courses.forms import RegistrationForm,LoginForm
 from django.views.generic.edit import FormView
@@ -60,3 +60,9 @@ class LoginView(View):
 def signout(request):
       logout(request)
       return redirect("home")
+
+def success(request):
+      return render(request,'success.html')
+
+def token_send(request):
+      return render(request,'token_send.html')

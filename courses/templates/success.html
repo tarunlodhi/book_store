@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load course_custom_tags %}
+{%block title%}
+Verification Successfully
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'courses/css/sent_mail.css'%}">
+{% endblock %}
+
+{%block content%}
+<div class="container">
+    <div>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+        <section class="mail-seccess section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3 col-12">
+                        <!-- Error Inner -->
+                        <div class="success-inner text center">
+                            <h1><i class="fa fa-envelope"></i>
+                                <span>Your mail has been varified
+                            <p>Please Click here to login</p>
+                            <a href='login' class="btn btn-primary btn-lg">Go Home</a>
+                        </div>
+                        <!--/ End Error Inner -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{%endblock%}

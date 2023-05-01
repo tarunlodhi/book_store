@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Course,Prerequisite,Tag,Learning,Video,Payment,UserCourse,CouponCode
+from .models import Course,Prerequisite,Tag,Learning,Video,Payment,UserCourse,CouponCode,Profile
 from django.utils.html import format_html
 
 class TagAdmin(admin.TabularInline):
@@ -63,8 +63,12 @@ class UserCourseAdmin(admin.ModelAdmin):
 class CouponCodeAdmin(admin.ModelAdmin):
     list_display =["code","course"]
 
+class ProfileAdmin(admin.ModelAdmin):
+    list_display =["user","username","auth_token","created_at","is_verified"]
+
 admin.site.register(Course,CourseAdmin)
 admin.site.register(Video)
 admin.site.register(Payment,PaymentAdmin)
 admin.site.register(UserCourse,UserCourseAdmin)
 admin.site.register(CouponCode,CouponCodeAdmin)
+admin.site.register(Profile)
