@@ -8,12 +8,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-k-dt_@bjsew1^s!8^i1f(lo4s(v8u-q!_k(3slhv2_&rzw*x9m'
+SECRET_KEY = os.environ.get("SECTRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*",'.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -129,8 +129,8 @@ MEDIA_ROOT= BASE_DIR
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #razor pay key_id and key_secret
-KEY_ID = "rzp_test_3Ek9hLi1GUY4fC"
-KEY_SECRET = "egekhcsMhf1AhK1wlJlIrRWb"
+KEY_ID = os.environ.get("RZP_KEY")
+KEY_SECRET = os.environ.get("RZP_SECRET")
 
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'courses/static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
