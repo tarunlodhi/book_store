@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-k-dt_@bjsew1^s!8^i1f(lo4s(v8u-q!_k(3slhv2_&rzw*x9m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -65,10 +65,15 @@ WSGI_APPLICATION = 'book_store.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'Book@Store12345',
+        'HOST': 'db.shqugezrsxutelvpzhgr.supabase.co',
+        'PORT': '5432',
     }
 }
+
 
 CACHES = {
     "default": {
