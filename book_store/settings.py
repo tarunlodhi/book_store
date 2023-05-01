@@ -1,8 +1,8 @@
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-k-dt_@bjsew1^s!8^i1f(lo4s(v8u-q!_k(3slhv2_&rzw*x9m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
@@ -126,4 +126,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #razor pay key_id and key_secret
 KEY_ID = "rzp_test_3Ek9hLi1GUY4fC"
 KEY_SECRET = "egekhcsMhf1AhK1wlJlIrRWb"
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
+
 
