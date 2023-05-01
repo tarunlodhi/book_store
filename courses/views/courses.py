@@ -16,7 +16,7 @@ def coursePage(request,slug):
         course = Course.objects.get(slug  = slug)
         serial_number  = request.GET.get('lecture')
         videos = course.video_set.all().order_by("serial_number")
-        next_lecture = 2
+        next_lecture = None
         previous_lecture = None
         if serial_number is None:
             serial_number = 1 
