@@ -7,9 +7,9 @@ class Course(models.Model):
     price = models.IntegerField(null=False)
     discount = models.IntegerField(null=False , default = 0) 
     active = models.BooleanField(default = False)
-    thumbnail = models.ImageField(upload_to = "files/thumbnail") 
+    thumbnail = models.URLField(max_length=5000,null=True,blank=True) 
     date = models.DateTimeField(auto_now_add= True) 
-    resource = models.FileField(upload_to = "files/resource")
+    resource = models.URLField(max_length=5000,null=True,blank=True) 
     length = models.IntegerField(null=False) 
     
     def __str__(self):
