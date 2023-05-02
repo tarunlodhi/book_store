@@ -10,6 +10,7 @@ import logging
 import razorpay
 
 client = razorpay.Client(auth=(settings.KEY_ID, settings.KEY_SECRET))
+logger = logging.getLogger()
 
 @login_required(login_url='/login')
 def checkout(request , slug):
@@ -87,18 +88,21 @@ def verifyPayment(request):
     if request.method == "POST":
         data = request.POST
         context = {}
+        logger.info(data)
         print(data)
         try:
+            logger.info("trying verify payment")
             client.utility.verify_payment_signature(data)
             razorpay_order_id = data['razorpay_order_id']
             razorpay_payment_id = data['razorpay_payment_id']
-
+            logger.info(razorpay_order_id,razorpay_payment_id)
             payment = Payment.objects.get(order_id = razorpay_order_id)
             payment.payment_id  = razorpay_payment_id
             payment.status =  True
             
             userCourse = UserCourse(user = payment.user , course = payment.course)
             userCourse.save()
+            logger.info("UserCourse" ,  userCourse.id)
 
             print("UserCourse" ,  userCourse.id)
 
