@@ -4,11 +4,12 @@ from django.shortcuts import HttpResponse
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from book_store.settings import *
+from django.conf import settings
 from time import time
-
+import logging
 import razorpay
-client = razorpay.Client(auth=(KEY_ID, KEY_SECRET))
+
+client = razorpay.Client(auth=(settings.KEY_ID, settings.KEY_SECRET))
 
 @login_required(login_url='/login')
 def checkout(request , slug):

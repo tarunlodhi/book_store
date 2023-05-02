@@ -1,8 +1,5 @@
-from django.contrib import admin
 from django.urls import path
 from .views import HomePageView,coursePage,SignupView,LoginView,signout,checkout,verifyPayment,my_courses,success,token_send
-from django.conf.urls.static import static
-from django.conf import settings
 
 urlpatterns = [
     path('', HomePageView.as_view() ,name="home"),
